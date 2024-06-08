@@ -1,16 +1,19 @@
 package com.backend.clinica_odontologica.dto.entrada;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 public class OdontologoEntradaDto {
-
-    @NotBlank(message="Debe tener el numero de matricula")
+    @NotBlank(message = "El campo matricula no puede estar en blanco")
+    @Size(max = 50, message = "La matricula debe tener maximo 50 caracteres")
     private String matricula;
 
-    @NotBlank(message="Debe tener el nombre del odontologo")
+    @NotBlank(message = "El campo nombre no puede estar en blanco")
+    @Size(max = 50, message = "El nombre debe tener maximo 50 caracteres")
     private String nombre;
 
-    @NotBlank(message="Debe tener el apellido del odontologo")
+    @NotBlank(message = "El campo apellido no puede estar en blanco")
+    @Size(max = 50, message = "El apellido debe tener maximo 50 caracteres")
     private String apellido;
 
     public OdontologoEntradaDto() {

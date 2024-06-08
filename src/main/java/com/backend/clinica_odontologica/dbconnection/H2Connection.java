@@ -1,4 +1,3 @@
-
 package com.backend.clinica_odontologica.dbconnection;
 
 import java.sql.Connection;
@@ -26,6 +25,5 @@ public class H2Connection {
                 ex.printStackTrace();
             }
         }
-
     }
 }

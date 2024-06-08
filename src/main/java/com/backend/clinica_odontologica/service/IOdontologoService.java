@@ -1,12 +1,14 @@
-
 package com.backend.clinica_odontologica.service;
 
-import com.backend.clinica_odontologica.entity.Odontologo;
-import com.backend.clinica_odontologica.entity.Paciente;
+import com.backend.clinica_odontologica.dto.entrada.OdontologoEntradaDto;
+import com.backend.clinica_odontologica.dto.salida.OdontologoSalidaDto;
 
-import java.util.List;
+import java.util.HashMap;
 
 public interface IOdontologoService {
-    Odontologo registrarOdontologo(Odontologo odontologo);
-    List<Odontologo> listarOdontologos();
+    OdontologoSalidaDto registrarOdontologo(OdontologoEntradaDto odontologoEntradaDto);
+    HashMap<Long, OdontologoSalidaDto> listarOdontologos();
+    OdontologoSalidaDto buscarOdontologoPorId(Long id);
+    void eliminarOdontologo(Long id);
+    OdontologoSalidaDto modificarOdontologo(OdontologoEntradaDto odontologoEntradaDto, Long id);
 }

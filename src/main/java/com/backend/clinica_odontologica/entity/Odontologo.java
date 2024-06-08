@@ -1,29 +1,27 @@
-
 package com.backend.clinica_odontologica.entity;
-
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "ODONTOLOGOS")
 public class Odontologo {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(length = 50, nullable = false)
     private String matricula;
+
+    @Column(length = 50, nullable = false)
     private String nombre;
+
+    @Column(length = 50, nullable = false)
     private String apellido;
 
-    public Odontologo(String matricula, String nombre, String apellido) {
-        this.matricula = matricula;
-        this.nombre = nombre;
-        this.apellido = apellido;
+    public Odontologo() {
     }
 
-    public Odontologo(Long id, String matricula, String nombre, String apellido) {
-        this.id = id;
+    public Odontologo(String matricula, String nombre, String apellido) {
         this.matricula = matricula;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -64,9 +62,9 @@ public class Odontologo {
     @Override
     public String toString() {
         return "Odontologo: " +
-                "id = " + id +
-                ", matricula = '" + matricula +
-                ", nombre = '" + nombre +
-                ", apellido = '" + apellido;
+                "id: " + id +
+                ", matricula: " + matricula +
+                ", nombre: " + nombre +
+                ", apellido: " + apellido;
     }
 }

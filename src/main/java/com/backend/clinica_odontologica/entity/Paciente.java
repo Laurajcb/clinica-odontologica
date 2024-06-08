@@ -1,4 +1,3 @@
-
 package com.backend.clinica_odontologica.entity;
 
 import javax.persistence.*;
@@ -7,29 +6,27 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "PACIENTES")
 public class Paciente {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(length = 50, nullable = false)
     private String nombre;
 
+    @Column(length = 50, nullable = false)
     private String apellido;
 
+    @Column(length = 20)
     private int dni;
+
+    @Column(nullable = false, name = "fecha")
     private LocalDate fechaIngreso;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "domicilio_id")
     private Domicilio domicilio;
 
     public Paciente() {
-    }
-
-    public Paciente(String nombre, String apellido, int dni, LocalDate fechaIngreso, Domicilio domicilio) {
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.dni = dni;
-        this.fechaIngreso = fechaIngreso;
-        this.domicilio = domicilio;
     }
 
     public Paciente(Long id, String nombre, String apellido, int dni, LocalDate fechaIngreso, Domicilio domicilio) {
@@ -91,13 +88,12 @@ public class Paciente {
 
     @Override
     public String toString() {
-        return "Paciente{" +
-                "id=" + id +
-                ", nombre='" + nombre + '\'' +
-                ", apellido='" + apellido + '\'' +
-                ", dni=" + dni +
-                ", fechaIngreso=" + fechaIngreso +
-                ", domicilio=" + domicilio +
-                '}';
+        return "Paciente: " +
+                "id: " + id +
+                ", nombre: " + nombre +
+                ", apellido: '" + apellido +
+                ", dni: " + dni +
+                ", fechaIngreso: " + fechaIngreso +
+                ", domicilio: " + domicilio;
     }
 }

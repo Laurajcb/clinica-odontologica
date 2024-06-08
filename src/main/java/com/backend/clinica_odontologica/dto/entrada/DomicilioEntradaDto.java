@@ -1,25 +1,21 @@
-
 package com.backend.clinica_odontologica.dto.entrada;
-
 
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Positive;
 
 public class DomicilioEntradaDto {
-
-
-    @NotBlank(message = "Debe proveerse el nombre de la calle del domicilio")
+    @NotBlank(message = "El campo calle no puede estar en blanco")
     private String calle;
 
-    @Positive(message = "El numero no puede ser nulo o menor a cero")
-    @Digits(integer = 8, fraction = 0, message = "El número debe tener como máximo 8 dígitos")
+    @Positive(message = "El campo numero no puede ser nulo o menor a cero")
+    @Digits(integer = 8, fraction = 0, message = "El numero debe tener como maximo 8 digitos")
     private int numero;
 
-    @NotBlank(message = "Debe proveerse la localidad del domicilio")
+    @NotBlank(message = "El campo localidad no puede estar en blanco")
     private String localidad;
 
-    @NotBlank(message = "Debe proveerse la provincia del domicilioo")
+    @NotBlank(message = "El campo provincia no puede estar en blanco")
     private String provincia;
 
     public DomicilioEntradaDto() {

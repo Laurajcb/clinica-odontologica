@@ -1,30 +1,32 @@
 package com.backend.clinica_odontologica.dto.salida;
 
-import com.backend.clinica_odontologica.entity.Odontologo;
-import com.backend.clinica_odontologica.entity.Paciente;
-
 import java.time.LocalDateTime;
 
 public class TurnoSalidaDto {
     private Long id;
 
     private LocalDateTime fechaYHora;
-    private Odontologo odontologo;
-    private Paciente paciente;
 
+    private OdontologoNombreApellidoSalidaDto odontologo;
+
+    private PacienteNombreApellidoSalidaDto paciente;
 
     public TurnoSalidaDto() {
     }
 
-    public TurnoSalidaDto(Long id, LocalDateTime fechaYHora, Odontologo odontologo, Paciente paciente) {
+    public TurnoSalidaDto(Long id, LocalDateTime fechaYHora, OdontologoNombreApellidoSalidaDto odontologoNombreApellidoSalidaDto, PacienteNombreApellidoSalidaDto pacienteNombreApellidoSalidaDto) {
         this.id = id;
         this.fechaYHora = fechaYHora;
-        this.odontologo = odontologo;
-        this.paciente = paciente;
+        this.odontologo = odontologoNombreApellidoSalidaDto;
+        this.paciente = pacienteNombreApellidoSalidaDto;
     }
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public LocalDateTime getFechaYHora() {
@@ -35,19 +37,27 @@ public class TurnoSalidaDto {
         this.fechaYHora = fechaYHora;
     }
 
-    public Odontologo getOdontologo() {
+    public OdontologoNombreApellidoSalidaDto getOdontologoNombreApellidoSalidaDto() {
         return odontologo;
     }
 
-    public void setOdontologo(Odontologo odontologo) {
-        this.odontologo = odontologo;
+    public void setOdontologoNombreApellidoSalidaDto(OdontologoNombreApellidoSalidaDto odontologoNombreApellidoSalidaDto) {
+        this.odontologo = odontologoNombreApellidoSalidaDto;
     }
 
-    public Paciente getPaciente() {
+    public PacienteNombreApellidoSalidaDto getPacienteNombreApellidoSalidaDto() {
         return paciente;
     }
 
-    public void setPaciente(Paciente paciente) {
-        this.paciente = paciente;
+    public void setPacienteNombreApellidoSalidaDto(PacienteNombreApellidoSalidaDto pacienteNombreApellidoSalidaDto) {
+        this.paciente = pacienteNombreApellidoSalidaDto;
+    }
+
+    @Override
+    public String toString() {
+        return "ID: " + id +
+                ", FECHA Y HORA: " + fechaYHora +
+                ", ODONTOLOGO: " + odontologo +
+                ", PACIENTE: " + paciente;
     }
 }

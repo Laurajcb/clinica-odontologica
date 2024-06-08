@@ -1,22 +1,22 @@
 package com.backend.clinica_odontologica.dto.salida;
 
-public class OdontologoSalidaDto {
+public class PacienteNombreApellidoSalidaDto {
     private Long id;
-
-    private String matricula;
 
     private String nombre;
 
     private String apellido;
 
-    public OdontologoSalidaDto() {
+    private int dni;
+
+    public PacienteNombreApellidoSalidaDto() {
     }
 
-    public OdontologoSalidaDto(Long id, String matricula, String nombre, String apellido) {
+    public PacienteNombreApellidoSalidaDto(Long id, String nombre, String apellido, int dni) {
         this.id = id;
-        this.matricula = matricula;
         this.nombre = nombre;
         this.apellido = apellido;
+        this.dni = dni;
     }
 
     public Long getId() {
@@ -25,14 +25,6 @@ public class OdontologoSalidaDto {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getMatricula() {
-        return matricula;
-    }
-
-    public void setMatricula(String matricula) {
-        this.matricula = matricula;
     }
 
     public String getNombre() {
@@ -51,11 +43,17 @@ public class OdontologoSalidaDto {
         this.apellido = apellido;
     }
 
+    public int getDni() {
+        return dni;
+    }
+
+    public void setDni(int dni) {
+        this.dni = dni;
+    }
+
     @Override
     public String toString() {
         return "id: " + id +
-                ", matricula: '" + matricula +
-                ", nombre: " + nombre +
-                ", apellido: " + apellido;
+                ", nombreCompleto: " + nombre + " " + apellido;
     }
 }

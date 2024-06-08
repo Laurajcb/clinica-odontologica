@@ -1,4 +1,3 @@
-
 package com.backend.clinica_odontologica.entity;
 
 import javax.persistence.*;
@@ -7,21 +6,26 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "TURNOS")
 public class Turno {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false, name = "fecha_y_hora")
     private LocalDateTime fechaYHora;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "odontologo_id")
     private Odontologo odontologo;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "paciente_id")
     private Paciente paciente;
 
+    public Turno() {
+    }
 
-    public Turno(LocalDateTime fechaYHora, Odontologo odontologo, Paciente paciente) {
-
-        this.fechaYHora = fechaYHora;
-        this.odontologo = odontologo;
-        this.paciente = paciente;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Turno(Long id, LocalDateTime fechaYHora, Odontologo odontologo, Paciente paciente) {
@@ -34,8 +38,6 @@ public class Turno {
     public Long getId() {
         return id;
     }
-
-
 
     public LocalDateTime getFechaYHora() {
         return fechaYHora;
@@ -63,11 +65,10 @@ public class Turno {
 
     @Override
     public String toString() {
-        return "Turno{" +
-                "id=" + id +
-                ", fechaYHora=" + fechaYHora +
-                ", odontologo=" + odontologo +
-                ", paciente=" + paciente +
-                '}';
+        return "Turno: " +
+                "id: " + id +
+                ", fechaYHora: " + fechaYHora +
+                ", odontologo: " + odontologo +
+                ", paciente: " + paciente;
     }
 }

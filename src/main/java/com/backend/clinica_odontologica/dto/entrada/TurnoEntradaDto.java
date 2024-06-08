@@ -1,7 +1,5 @@
 package com.backend.clinica_odontologica.dto.entrada;
 
-import com.backend.clinica_odontologica.entity.Odontologo;
-import com.backend.clinica_odontologica.entity.Paciente;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.validation.Valid;
@@ -10,27 +8,26 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 public class TurnoEntradaDto {
-
-    @FutureOrPresent(message = "La fecha y hora no puede ser anterior a la actual")
-    @NotNull(message = "Debe especificarse la fecha del turno del paciente")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
+    @FutureOrPresent(message = "La fecha y hora del turno no pueden ser anterior a la actual")
+    @NotNull(message = "El campo fecha y hora de turno no puede ser nulo")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime fechaYHora;
 
-    @NotNull(message = "El odontologo de turno no puede ser nulo")
+    @NotNull(message = "El campo id de odontologo del turno no puede ser nulo")
     @Valid
-    private OdontologoEntradaDto odontologoEntradaDto;
+    private OdontologoEntradaDto odontologo;
 
-    @NotNull(message = "El paciente de turno no puede ser nulo")
+    @NotNull(message = "El campo id de paciente del turno no puede ser nulo")
     @Valid
-    private PacienteEntradaDto pacienteEntradaDto;
+    private PacienteEntradaDto paciente;
 
     public TurnoEntradaDto() {
     }
 
     public TurnoEntradaDto(LocalDateTime fechaYHora, OdontologoEntradaDto odontologoEntradaDto, PacienteEntradaDto pacienteEntradaDto) {
         this.fechaYHora = fechaYHora;
-        this.odontologoEntradaDto = odontologoEntradaDto;
-        this.pacienteEntradaDto = pacienteEntradaDto;
+        this.odontologo = odontologoEntradaDto;
+        this.paciente = pacienteEntradaDto;
     }
 
     public LocalDateTime getFechaYHora() {
@@ -41,19 +38,19 @@ public class TurnoEntradaDto {
         this.fechaYHora = fechaYHora;
     }
 
-    public OdontologoEntradaDto getOdontologoEntradaDto() {
-        return odontologoEntradaDto;
+    public OdontologoEntradaDto getOdontologo() {
+        return odontologo;
     }
 
-    public void setOdontologoEntradaDto(OdontologoEntradaDto odontologoEntradaDto) {
-        this.odontologoEntradaDto = odontologoEntradaDto;
+    public void setOdontologo(OdontologoEntradaDto odontologoEntradaDto) {
+        this.odontologo = odontologoEntradaDto;
     }
 
-    public PacienteEntradaDto getPacienteEntradaDto() {
-        return pacienteEntradaDto;
+    public PacienteEntradaDto getPaciente() {
+        return paciente;
     }
 
-    public void setPacienteEntradaDto(PacienteEntradaDto pacienteEntradaDto) {
-        this.pacienteEntradaDto = pacienteEntradaDto;
+    public void setPaciente(PacienteEntradaDto pacienteEntradaDto) {
+        this.paciente = pacienteEntradaDto;
     }
 }
