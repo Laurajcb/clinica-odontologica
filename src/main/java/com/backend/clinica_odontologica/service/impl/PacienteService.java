@@ -3,6 +3,7 @@ package com.backend.clinica_odontologica.service.impl;
 import com.backend.clinica_odontologica.dto.entrada.PacienteEntradaDto;
 import com.backend.clinica_odontologica.dto.salida.PacienteSalidaDto;
 import com.backend.clinica_odontologica.entity.Paciente;
+import com.backend.clinica_odontologica.exceptions.ResourceNotFoundException;
 import com.backend.clinica_odontologica.repository.PacienteRepository;
 import com.backend.clinica_odontologica.service.IPacienteService;
 import com.backend.clinica_odontologica.utils.JsonPrinter;
@@ -69,13 +70,13 @@ public class PacienteService implements IPacienteService {
     }
 
     @Override
-    public void eliminarPaciente(Long id) {
+    public void eliminarPaciente(Long id) throws ResourceNotFoundException {
         if(buscarPacientePorId(id) != null){
             pacienteRepository.deleteById(id);
             LOGGER.warn("Se ha eliminado el paciente con id {}", id);
-        } // else {
-        //lanzar excepcion
-        //}
+        } else {
+            throw new ResourceNotFoundException("No existe registro del paciente con id " + id);
+        }
     }
 
     @Override
