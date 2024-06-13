@@ -31,9 +31,10 @@ public class PacienteService implements IPacienteService {
 
     @Override
     public PacienteSalidaDto registrarPaciente(PacienteEntradaDto pacienteEntradaDto) {
-        Paciente paciente = modelMapper.map(pacienteEntradaDto, Paciente.class);
+        PacienteEntradaDto paciente = new PacienteEntradaDto(pacienteEntradaDto.getNombre(), pacienteEntradaDto.getApellido(), pacienteEntradaDto.getDni(), pacienteEntradaDto.getDomicilio());
+        Paciente pacienteRecibido = modelMapper.map(paciente, Paciente.class);
 
-        PacienteSalidaDto pacienteSalidaDto = modelMapper.map(pacienteRepository.save(paciente), PacienteSalidaDto.class);
+        PacienteSalidaDto pacienteSalidaDto = modelMapper.map(pacienteRepository.save(pacienteRecibido), PacienteSalidaDto.class);
         LOGGER.info("Paciente Registrado: {}" + JsonPrinter.toString(pacienteSalidaDto));
 
         return pacienteSalidaDto;

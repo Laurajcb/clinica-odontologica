@@ -29,6 +29,7 @@ window.addEventListener("load", function () {
             headers: {
                 "Content-Type": "application/json",
             },
+            mode: "no-cors",
         }
 
         crearPaciente(configuraciones)
@@ -36,8 +37,10 @@ window.addEventListener("load", function () {
     })
 
     function crearPaciente(configuraciones){
-        fetch(`${url}/pacientes/registrar`, configuraciones)
-        .then(response => console.log(response))
+        fetch(`${url}pacientes/registrar/`, configuraciones)
+        .then ( response => {
+            console.log(response)
+        })
         .then(datos => {
             console.log("Respuesta servidor: ", datos)
         })

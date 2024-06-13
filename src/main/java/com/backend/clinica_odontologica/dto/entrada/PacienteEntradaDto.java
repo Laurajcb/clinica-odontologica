@@ -32,11 +32,11 @@ public class PacienteEntradaDto {
     public PacienteEntradaDto() {
     }
 
-    public PacienteEntradaDto(String nombre, String apellido, int dni, LocalDate fechaIngreso, DomicilioEntradaDto domicilio) {
+    public PacienteEntradaDto(String nombre, String apellido, int dni, DomicilioEntradaDto domicilio) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
-        this.fechaIngreso = fechaIngreso;
+        this.fechaIngreso = LocalDate.now();
         this.domicilio = domicilio;
     }
 
