@@ -14,6 +14,7 @@ import java.util.HashMap;
 
 @RestController
 @RequestMapping("pacientes")
+@CrossOrigin(origins = "*")
 public class PacienteController {
     private IPacienteService pacienteService;
 

@@ -8,20 +8,31 @@ window.addEventListener("load", function () {
         const nombre = document.getElementById("nombre").value
         const apellido = document.getElementById("apellido").value
         const dni = document.getElementById("dni").value
+        const fechaIngreso = '2024-06-13'
         const calle = document.getElementById("calle").value
         const numero = document.getElementById("numero").value
         const localidad = document.getElementById("localidad").value
         const provincia = document.getElementById("provincia").value
 
+//        const  fechaValue = fechaInput.value
+//        const fechaIngreso = new Date(fechaValue).toISOString().slice(0, 10)
+//        console.log(fechaIngreso)
+
+
         const datos = {
             nombre: nombre,
             apellido: apellido,
             dni: dni,
-            calle: calle,
-            numero: numero,
-            localidad: localidad,
-            provincia: provincia,
+            fechaIngreso: fechaIngreso,
+            domicilio: {
+                calle: calle,
+                numero: numero,
+                localidad: localidad,
+                provincia: provincia,
+            }
+
         }
+        console.log(fechaIngreso)
 
         const configuraciones = {
             method: "POST",
@@ -29,7 +40,6 @@ window.addEventListener("load", function () {
             headers: {
                 "Content-Type": "application/json",
             },
-            mode: "no-cors",
         }
 
         crearPaciente(configuraciones)
@@ -38,15 +48,18 @@ window.addEventListener("load", function () {
 
     function crearPaciente(configuraciones){
         fetch(`${url}pacientes/registrar/`, configuraciones)
-        .then ( response => {
-            console.log(response)
-        })
-        .then(datos => {
-            console.log("Respuesta servidor: ", datos)
-        })
-        .catch(e => {
-            console.error(e)
-        })
+            .then(response => {
+                if (!response.ok) {
+                     throw new Error("Error en la solicitud: " + response.status);
+                }
+                 return response.json();
+                 })
+                 .then(datos => {
+                    console.log("Respuesta servidor: ", datos);
+                 })
+                 .catch(e => {
+                    console.error("Error al enviar la solicitud:", e);
+                });
     }
 
 })
