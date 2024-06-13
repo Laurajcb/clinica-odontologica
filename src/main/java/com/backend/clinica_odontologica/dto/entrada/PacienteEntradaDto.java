@@ -20,7 +20,6 @@ public class PacienteEntradaDto {
     private int dni;
 
     @FutureOrPresent(message = "La fecha de ingreso no puede ser anterior al dia de hoy")
-    @NotNull(message = "El campo fecha de ingreso no puede ser nulo")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate fechaIngreso;
 
@@ -36,7 +35,7 @@ public class PacienteEntradaDto {
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
-        this.fechaIngreso = LocalDate.now();
+         this.fechaIngreso = LocalDate.now();
         this.domicilio = domicilio;
     }
 

@@ -8,22 +8,17 @@ window.addEventListener("load", function () {
         const nombre = document.getElementById("nombre").value
         const apellido = document.getElementById("apellido").value
         const dni = document.getElementById("dni").value
-        const fechaIngreso = '2024-06-13'
+//        const fechaIngreso = '2024-06-13'
         const calle = document.getElementById("calle").value
         const numero = document.getElementById("numero").value
         const localidad = document.getElementById("localidad").value
         const provincia = document.getElementById("provincia").value
 
-//        const  fechaValue = fechaInput.value
-//        const fechaIngreso = new Date(fechaValue).toISOString().slice(0, 10)
-//        console.log(fechaIngreso)
-
-
         const datos = {
             nombre: nombre,
             apellido: apellido,
             dni: dni,
-            fechaIngreso: fechaIngreso,
+//            fechaIngreso: fechaIngreso,
             domicilio: {
                 calle: calle,
                 numero: numero,
@@ -32,7 +27,6 @@ window.addEventListener("load", function () {
             }
 
         }
-        console.log(fechaIngreso)
 
         const configuraciones = {
             method: "POST",

@@ -35,7 +35,7 @@ public class PacienteService implements IPacienteService {
         Paciente pacienteRecibido = modelMapper.map(paciente, Paciente.class);
 
         PacienteSalidaDto pacienteSalidaDto = modelMapper.map(pacienteRepository.save(pacienteRecibido), PacienteSalidaDto.class);
-        LOGGER.info("Paciente Registrado: {}" + JsonPrinter.toString(pacienteSalidaDto));
+        LOGGER.info("Paciente Registrado: " + JsonPrinter.toString(pacienteSalidaDto));
 
         return pacienteSalidaDto;
     }
@@ -51,7 +51,7 @@ public class PacienteService implements IPacienteService {
             pacientesSalidaDto.put(pacienteSalidaDto.getId(), pacienteSalidaDto);
         });
 
-        LOGGER.info("Listado de todos los pacientes: {}", JsonPrinter.toString(pacientesSalidaDto));
+        LOGGER.info("Listado de todos los pacientes: ", JsonPrinter.toString(pacientesSalidaDto));
 
         return pacientesSalidaDto;
     }
@@ -102,7 +102,7 @@ public class PacienteService implements IPacienteService {
 
             pacienteRepository.save(pacienteAModificar);
             pacienteSalidaDto = modelMapper.map(pacienteAModificar, PacienteSalidaDto.class);
-            LOGGER.warn("Paciente actualizado: {}", JsonPrinter.toString(pacienteSalidaDto));
+            LOGGER.warn("Paciente actualizado: ", JsonPrinter.toString(pacienteSalidaDto));
         } else {
             LOGGER.error("No fue posible actualizar el paciente porque no se encuentra en nuestra base de datos");
             //lanzar excepcion
