@@ -7,7 +7,7 @@ import com.backend.clinica_odontologica.exceptions.ResourceNotFoundException;
 import java.util.HashMap;
 
 public interface ITurnoService {
-    TurnoSalidaDto registrarTurno(TurnoEntradaDto turnoEntradaDto);
+    TurnoSalidaDto registrarTurno(TurnoEntradaDto turnoEntradaDto) throws ResourceNotFoundException;
     HashMap<Long, TurnoSalidaDto> listarTurnos();
     TurnoSalidaDto buscarTurnoPorId(Long id);
     void eliminarTurno(Long id) throws ResourceNotFoundException;

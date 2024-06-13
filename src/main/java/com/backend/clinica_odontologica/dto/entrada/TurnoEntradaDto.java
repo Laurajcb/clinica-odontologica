@@ -53,4 +53,5 @@ public class TurnoEntradaDto {
     public void setPaciente(PacienteEntradaDto pacienteEntradaDto) {
         this.paciente = pacienteEntradaDto;
     }
+
 }

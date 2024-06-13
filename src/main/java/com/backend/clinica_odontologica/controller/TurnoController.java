@@ -4,6 +4,7 @@ import com.backend.clinica_odontologica.dto.entrada.TurnoEntradaDto;
 import com.backend.clinica_odontologica.dto.salida.TurnoSalidaDto;
 import com.backend.clinica_odontologica.exceptions.ResourceNotFoundException;
 import com.backend.clinica_odontologica.service.ITurnoService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,13 +17,20 @@ import java.util.HashMap;
 public class TurnoController {
     private ITurnoService turnoService;
 
+    @Autowired
     public TurnoController(ITurnoService turnoService) {
         this.turnoService = turnoService;
     }
 
     @PostMapping("/registrar")
-    public TurnoSalidaDto registrarTurno(@RequestBody @Valid TurnoEntradaDto turnoEntradaDto) {
-        return turnoService.registrarTurno(turnoEntradaDto);
+    public ResponseEntity<TurnoSalidaDto> registrarTurno(@RequestBody @Valid TurnoEntradaDto turnoEntradaDto) {
+        TurnoSalidaDto turnoSalidaDto = turnoService.registrarTurno(turnoEntradaDto);
+        return ResponseEntity.ok(turnoSalidaDto);
+    }
+
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<String> handleResourceNotFoundException(ResourceNotFoundException ex) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
     }
 
     @GetMapping("/listar/todos")
@@ -45,4 +53,5 @@ public class TurnoController {
         turnoService.eliminarTurno(id);
         return new ResponseEntity<>("Turno eliminado exitosamente", HttpStatus.NO_CONTENT);
     }
+
 }

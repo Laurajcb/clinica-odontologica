@@ -28,6 +28,7 @@ public class PacienteEntradaDto {
     @Valid
     private DomicilioEntradaDto domicilio;
 
+    private Long id;
     public PacienteEntradaDto() {
     }
 
@@ -38,6 +39,7 @@ public class PacienteEntradaDto {
         this.fechaIngreso = fechaIngreso;
         this.domicilio = domicilio;
     }
+
 
     public String getNombre() {
         return nombre;
@@ -78,4 +80,14 @@ public class PacienteEntradaDto {
     public void setDomicilio(DomicilioEntradaDto domicilio) {
         this.domicilio = domicilio;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+
 }

@@ -4,6 +4,7 @@ import com.backend.clinica_odontologica.dto.entrada.PacienteEntradaDto;
 import com.backend.clinica_odontologica.dto.salida.PacienteSalidaDto;
 import com.backend.clinica_odontologica.exceptions.ResourceNotFoundException;
 import com.backend.clinica_odontologica.service.IPacienteService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,7 @@ import java.util.HashMap;
 public class PacienteController {
     private IPacienteService pacienteService;
 
+    @Autowired
     public PacienteController(IPacienteService pacienteService) {
         this.pacienteService = pacienteService;
     }
