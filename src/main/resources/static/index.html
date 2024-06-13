@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link href="css/styles.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <title>Frontend Pacientes - Clinica Odontologica</title>
+</head>
+
+<body>
+<header>
+    <h1>Resgistro de Pacientes</h1>
+</header>
+
+<main>
+    <form id="PacientesForm">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" required>
+
+        <label for="apellido">Apellido:</label>
+        <input type="text" id="apellido" name="apellido" required>
+
+        <label for="dni">Dni</label>
+        <input type="text" id="dni" name="dni" required>
+
+        <label for="calle">Calle:</label>
+        <input type="text" id="calle" name="calle" required>
+
+        <label for="numero">Numero:</label>
+        <input type="number" id="numero" name="numero" required>
+
+        <label for="localidad">Localidad:</label>
+        <input type="text" id="localidad" name="localidad" required>
+
+        <label for="provincia">Provincia:</label>
+        <input type="text" id="provincia" name="provincia" required>
+
+        <button type="submit">Registrar Paciente</button>
+
+    </form>
+    <hr>
+
+    <article>
+        <h2>Buscar paciente</h2>
+
+        <form>
+            <label for="pacientes"></label>
+            <select name="pacientes" id="pacientes">
+                <option></option>
+            </select>
+
+            <div>
+                <button type="submit">Buscar</button>
+                <button type="submit">Eliminar</button>
+                <button type="submit">Modificar</button>
+            </div>
+
+        </form>
+        <hr>
+
+        <section>
+            <h2>Información del paciente: </h2>
+            <p>Nombre apellido</p>
+            <p>Dni</p>
+            <p>Fecha ingreso</p>
+            <p>Domicilio</p>
+        </section>
+
+
+        <section>
+            <form id="">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" value="nombre" required>
+
+                <label for="apellido">Apellido:</label>
+                <input type="text" id="apellido" name="apellido" value="apellido" required>
+
+                <label for="dni">Dni</label>
+                <input type="text" id="dni" name="dni" value="dni" required>
+
+                <label for="calle">Calle:</label>
+                <input type="text" id="calle" name="calle" value="calle" required>
+
+                <label for="numero">Numero:</label>
+                <input type="number" id="numero" name="numero" value="numero" required>
+
+                <label for="localidad">Localidad:</label>
+                <input type="text" id="localidad" name="localidad" value="localidad" required>
+
+                <label for="provincia">Provincia:</label>
+                <input type="text" id="provincia" name="provincia" value="provincia" required>
+
+                <button type="submit">Guardar cambios</button>
+                <button type="submit">Cancelar cambios</button>
+            </form>
+        </section>
+    </article>
+
+    <script src="./js/registrarPaciente.js"></script>
+
+</main>
+
+<footer>
+    <p></p>
+</footer>
+</body>
+
+</html>
