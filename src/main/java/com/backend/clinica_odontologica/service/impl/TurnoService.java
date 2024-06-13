@@ -3,6 +3,7 @@ package com.backend.clinica_odontologica.service.impl;
 import com.backend.clinica_odontologica.dto.entrada.TurnoEntradaDto;
 import com.backend.clinica_odontologica.dto.salida.TurnoSalidaDto;
 import com.backend.clinica_odontologica.entity.Turno;
+import com.backend.clinica_odontologica.exceptions.BadRequestException;
 import com.backend.clinica_odontologica.exceptions.ResourceNotFoundException;
 import com.backend.clinica_odontologica.repository.OdontologoRepository;
 import com.backend.clinica_odontologica.repository.PacienteRepository;
@@ -35,12 +36,12 @@ public class TurnoService implements ITurnoService {
 
 
     @Override
-    public TurnoSalidaDto registrarTurno(TurnoEntradaDto turnoEntradaDto) throws ResourceNotFoundException {
+    public TurnoSalidaDto registrarTurno(TurnoEntradaDto turnoEntradaDto) throws BadRequestException {
         if (!pacienteRepository.existsById(turnoEntradaDto.getPaciente().getId())) {
-            throw new ResourceNotFoundException("Paciente no encontrado con ID: " + turnoEntradaDto.getPaciente().getId());
+            throw new BadRequestException("Paciente no encontrado con ID: " + turnoEntradaDto.getPaciente().getId());
         }
         if (!odontologoRepository.existsById(turnoEntradaDto.getOdontologo().getId())) {
-            throw new ResourceNotFoundException("Odontólogo no encontrado con ID: " + turnoEntradaDto.getOdontologo().getId());
+            throw new BadRequestException("Odontólogo no encontrado con ID: " + turnoEntradaDto.getOdontologo().getId());
         }
 
 
@@ -83,13 +84,13 @@ public class TurnoService implements ITurnoService {
     }
 
     @Override
-    public void eliminarTurno(Long id) {
+    public void eliminarTurno(Long id) throws ResourceNotFoundException{
         if(buscarTurnoPorId(id) != null){
             turnoRepository.deleteById(id);
             LOGGER.warn("Se ha eliminado el turno con id {}", id);
-        } // else {
-        //lanzar excepcion
-        //}
+        } else {
+            throw new ResourceNotFoundException("No existe registro de turno  con id " + id);
+        }
     }
 
     @Override
