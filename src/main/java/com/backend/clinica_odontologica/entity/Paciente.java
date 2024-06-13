@@ -29,12 +29,12 @@ public class Paciente {
     public Paciente() {
     }
 
-    public Paciente(Long id, String nombre, String apellido, int dni, LocalDate fechaIngreso, Domicilio domicilio) {
+    public Paciente(Long id, String nombre, String apellido, int dni, Domicilio domicilio) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
-        this.fechaIngreso = fechaIngreso;
+        this.fechaIngreso = LocalDate.now();
         this.domicilio = domicilio;
     }
 
