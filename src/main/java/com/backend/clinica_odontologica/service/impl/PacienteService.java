@@ -81,7 +81,7 @@ public class PacienteService implements IPacienteService {
     }
 
     @Override
-    public PacienteSalidaDto modificarPaciente(PacienteEntradaDto pacienteEntradaDto, Long id) {
+    public PacienteSalidaDto modificarPaciente(PacienteEntradaDto pacienteEntradaDto, Long id) throws ResourceNotFoundException {
         Paciente pacienteRecibido = modelMapper.map(pacienteEntradaDto, Paciente.class);
         Paciente pacienteAModificar = pacienteRepository.findById(id).orElse(null);
         PacienteSalidaDto pacienteSalidaDto = null;
@@ -105,7 +105,7 @@ public class PacienteService implements IPacienteService {
             LOGGER.warn("Paciente actualizado: ", JsonPrinter.toString(pacienteSalidaDto));
         } else {
             LOGGER.error("No fue posible actualizar el paciente porque no se encuentra en nuestra base de datos");
-            //lanzar excepcion
+            throw new ResourceNotFoundException("No existe registro de paciente con id " + id);
         }
 
         return pacienteSalidaDto;
