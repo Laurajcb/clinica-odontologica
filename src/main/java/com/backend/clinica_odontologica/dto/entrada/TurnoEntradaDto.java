@@ -8,6 +8,7 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 public class TurnoEntradaDto {
+
     @FutureOrPresent(message = "La fecha y hora del turno no pueden ser anterior a la actual")
     @NotNull(message = "El campo fecha y hora de turno no puede ser nulo")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
@@ -21,6 +22,7 @@ public class TurnoEntradaDto {
     @Valid
     private PacienteEntradaDto paciente;
 
+    private Long id;
     public TurnoEntradaDto() {
     }
 
@@ -52,6 +54,14 @@ public class TurnoEntradaDto {
 
     public void setPaciente(PacienteEntradaDto pacienteEntradaDto) {
         this.paciente = pacienteEntradaDto;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
 }

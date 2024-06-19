@@ -32,7 +32,7 @@ public class OdontologoService implements IOdontologoService {
         Odontologo odontologo = modelMapper.map(odontologoEntradaDto, Odontologo.class);
 
         OdontologoSalidaDto odontologoSalidaDto = modelMapper.map(odontologoRepository.save(odontologo), OdontologoSalidaDto.class);
-        LOGGER.info("Odontologo Registrado: {}" + JsonPrinter.toString(odontologoSalidaDto));
+        LOGGER.info("Odontologo Registrado: " + JsonPrinter.toString(odontologoSalidaDto));
 
         return odontologoSalidaDto;
     }
