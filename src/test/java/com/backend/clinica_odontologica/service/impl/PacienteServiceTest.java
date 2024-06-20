@@ -21,20 +21,17 @@ import static org.junit.jupiter.api.Assertions.*;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 //@RunWith(SpringJUnit4ClassRunner.class)
 class PacienteServiceTest {
-
     @Autowired
     private PacienteService pacienteService;
 
     @Test
     @Order(1)
-    void deberiaRegistrarseUnPacienteDeNombreMaria_yRetornarSuId() {
+    void deberiaRegistrarseUnPacienteDeNombreMariaYRetornarSuId() {
         DomicilioEntradaDto domicilioEntradaDto = new DomicilioEntradaDto("Calle", 123, "Sol", "Pool");
-
         PacienteEntradaDto pacienteEntradaDto = new PacienteEntradaDto("Maria", "Perez", 12345, domicilioEntradaDto);
 
         PacienteSalidaDto pacienteSalidaDto = pacienteService.registrarPaciente(pacienteEntradaDto);
 
-        // assert
         assertNotNull(pacienteSalidaDto);
         assertNotNull(pacienteSalidaDto.getId());
         assertEquals("Maria", pacienteSalidaDto.getNombre());
@@ -44,8 +41,10 @@ class PacienteServiceTest {
     @Order(2)
     void deberiaDevolverUnaListaNoVaciaDePacientes() {
         HashMap<Long, PacienteSalidaDto> listadoDePacientes = pacienteService.listarPacientes();
+
         assertFalse(listadoDePacientes.isEmpty());
     }
+
     @Test
     @Order(3)
     void deberiaEliminarseElPacienteConId1() {
@@ -56,24 +55,24 @@ class PacienteServiceTest {
     @Order(4)
     void deberiaDevolverUnaListaVaciaDePacientes() {
         HashMap<Long, PacienteSalidaDto> listadoDePacientes = pacienteService.listarPacientes();
+
         assertTrue(listadoDePacientes.isEmpty());
     }
 
     @Test
     @Order(5)
-    void deberiaLanzarResourceNotFoundExceptionSiPacienteNoExiste() {
-        Long idNoExistente = 999L; // Suponiendo que este ID no existe en la base de datos
+    void deberiaLanzarResourceNotFoundExceptionAlEliminarPacienteInexistente() {
+        Long idNoExistente = 999L;
+
         assertThrows(ResourceNotFoundException.class, () -> pacienteService.eliminarPaciente(idNoExistente));
     }
 
     @Test
     @Order(6)
-    void deberiaModificarPacienteExistente() {
+    void deberiaLanzarResourceNotFoundExceptionAlModificarPacienteInexistente() {
         DomicilioEntradaDto domicilioEntradaDto = new DomicilioEntradaDto("Calle", 123, "Sol", "Pool");
-
         PacienteEntradaDto pacienteEntradaDto = new PacienteEntradaDto("Carlos", "Lopez", 12345, domicilioEntradaDto);
-
-        Long idPaciente = 1L; // Suponiendo que este ID existe en la base de datos
+        Long idPaciente = 1L;
 
         // Verifica que se lance la excepción ResourceNotFoundException
         assertThrows(ResourceNotFoundException.class, () -> pacienteService.modificarPaciente(pacienteEntradaDto, idPaciente));

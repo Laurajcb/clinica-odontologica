@@ -88,6 +88,7 @@ public class PacienteService implements IPacienteService {
 
         if(pacienteAModificar != null){
             pacienteRecibido.setId(pacienteAModificar.getId());
+            pacienteRecibido.setFechaIngreso(pacienteAModificar.getFechaIngreso());
             pacienteRecibido.getDomicilio().setId(pacienteAModificar.getDomicilio().getId());
             pacienteAModificar = pacienteRecibido;
 
@@ -102,10 +103,10 @@ public class PacienteService implements IPacienteService {
 
             pacienteRepository.save(pacienteAModificar);
             pacienteSalidaDto = modelMapper.map(pacienteAModificar, PacienteSalidaDto.class);
-            LOGGER.warn("Paciente actualizado: ", JsonPrinter.toString(pacienteSalidaDto));
+            LOGGER.warn("Paciente actualizado: {}", JsonPrinter.toString(pacienteSalidaDto));
         } else {
             LOGGER.error("No fue posible actualizar el paciente porque no se encuentra en nuestra base de datos");
-            throw new ResourceNotFoundException("No existe registro de paciente con id " + id);
+            throw new ResourceNotFoundException("No existe registro del paciente con id " + id);
         }
 
         return pacienteSalidaDto;
@@ -115,6 +116,6 @@ public class PacienteService implements IPacienteService {
         modelMapper.typeMap(PacienteEntradaDto.class, Paciente.class)
                 .addMappings(mapper -> mapper.map(PacienteEntradaDto::getDomicilio, Paciente::setDomicilio));
         modelMapper.typeMap(Paciente.class, PacienteSalidaDto.class)
-                .addMappings(mapper -> mapper.map(Paciente::getDomicilio, PacienteSalidaDto::setDomicilioSalidaDto));
+                .addMappings(mapper -> mapper.map(Paciente::getDomicilio, PacienteSalidaDto::setDomicilio));
     }
 }

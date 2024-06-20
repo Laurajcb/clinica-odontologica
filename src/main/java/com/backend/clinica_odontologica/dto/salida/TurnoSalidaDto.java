@@ -14,11 +14,11 @@ public class TurnoSalidaDto {
     public TurnoSalidaDto() {
     }
 
-    public TurnoSalidaDto(Long id, LocalDateTime fechaYHora, OdontologoNombreApellidoSalidaDto odontologoNombreApellidoSalidaDto, PacienteNombreApellidoSalidaDto pacienteNombreApellidoSalidaDto) {
+    public TurnoSalidaDto(Long id, LocalDateTime fechaYHora, OdontologoNombreApellidoSalidaDto odontologo, PacienteNombreApellidoSalidaDto paciente) {
         this.id = id;
         this.fechaYHora = fechaYHora;
-        this.odontologo = odontologoNombreApellidoSalidaDto;
-        this.paciente = pacienteNombreApellidoSalidaDto;
+        this.odontologo = odontologo;
+        this.paciente = paciente;
     }
 
     public Long getId() {
@@ -37,20 +37,20 @@ public class TurnoSalidaDto {
         this.fechaYHora = fechaYHora;
     }
 
-    public OdontologoNombreApellidoSalidaDto getOdontologoNombreApellidoSalidaDto() {
+    public OdontologoNombreApellidoSalidaDto getOdontologo() {
         return odontologo;
     }
 
-    public void setOdontologoNombreApellidoSalidaDto(OdontologoNombreApellidoSalidaDto odontologoNombreApellidoSalidaDto) {
-        this.odontologo = odontologoNombreApellidoSalidaDto;
+    public void setOdontologo(OdontologoNombreApellidoSalidaDto odontologo) {
+        this.odontologo = odontologo;
     }
 
-    public PacienteNombreApellidoSalidaDto getPacienteNombreApellidoSalidaDto() {
+    public PacienteNombreApellidoSalidaDto getPaciente() {
         return paciente;
     }
 
-    public void setPacienteNombreApellidoSalidaDto(PacienteNombreApellidoSalidaDto pacienteNombreApellidoSalidaDto) {
-        this.paciente = pacienteNombreApellidoSalidaDto;
+    public void setPaciente(PacienteNombreApellidoSalidaDto paciente) {
+        this.paciente = paciente;
     }
 
     @Override

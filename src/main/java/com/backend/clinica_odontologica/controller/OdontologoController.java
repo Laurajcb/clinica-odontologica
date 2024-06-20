@@ -14,6 +14,7 @@ import java.util.HashMap;
 
 @RestController
 @RequestMapping("odontologos")
+@CrossOrigin
 public class OdontologoController {
     private IOdontologoService odontologoService;
 
@@ -23,13 +24,13 @@ public class OdontologoController {
     }
 
     @PostMapping("/registrar")
-    public OdontologoSalidaDto registrarOdontologo(@RequestBody @Valid OdontologoEntradaDto odontologoEntradaDto) {
-        return odontologoService.registrarOdontologo(odontologoEntradaDto);
+    public ResponseEntity<OdontologoSalidaDto> registrarOdontologo(@RequestBody @Valid OdontologoEntradaDto odontologoEntradaDto) {
+        return new ResponseEntity<>(odontologoService.registrarOdontologo(odontologoEntradaDto), HttpStatus.CREATED);
     }
 
     @GetMapping("/listar/todos")
-    public HashMap<Long, OdontologoSalidaDto> listarOdontologos() {
-        return odontologoService.listarOdontologos();
+    public ResponseEntity<HashMap<Long, OdontologoSalidaDto>> listarOdontologos() {
+        return new ResponseEntity<>(odontologoService.listarOdontologos(), HttpStatus.OK);
     }
 
     @GetMapping("/listar/{id}")
@@ -43,8 +44,8 @@ public class OdontologoController {
     }
 
     @DeleteMapping("/eliminar")
-    public ResponseEntity<?> eliminarOdontologo(@RequestParam Long id)  throws ResourceNotFoundException {
+    public ResponseEntity<?> eliminarOdontologo(@RequestParam Long id) throws ResourceNotFoundException {
         odontologoService.eliminarOdontologo(id);
-        return new ResponseEntity<>("Odontologo eliminado exitosamente", HttpStatus.OK);
+        return ResponseEntity.ok("Odontologo eliminado exitosamente");
     }
 }

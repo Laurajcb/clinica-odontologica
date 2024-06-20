@@ -22,7 +22,6 @@ public class GlobalExceptionHandler {
         return mensaje;
     }
 
-    //Manejo de BadRequestException
     @ExceptionHandler({BadRequestException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public Map<String, String> manejarBadRequestException(BadRequestException badRequestException) {

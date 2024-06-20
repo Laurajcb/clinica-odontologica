@@ -68,12 +68,12 @@ public class OdontologoService implements IOdontologoService {
     }
 
     @Override
-    public void eliminarOdontologo(Long id) throws ResourceNotFoundException{
-        if(buscarOdontologoPorId(id) != null) {
+    public void eliminarOdontologo(Long id) throws ResourceNotFoundException {
+        if (buscarOdontologoPorId(id) != null) {
             odontologoRepository.deleteById(id);
             LOGGER.warn("Se ha eliminado el odontologo con id {}", id);
-        }else {
-            throw new ResourceNotFoundException("No existe registro de odontologo con id " + id);
+        } else {
+            throw new ResourceNotFoundException("No existe registro del odontologo con id " + id);
         }
     }
 
@@ -93,7 +93,7 @@ public class OdontologoService implements IOdontologoService {
             LOGGER.warn("Odontologo actualizado: {}", JsonPrinter.toString(odontologoSalidaDto));
         } else {
             LOGGER.error("No fue posible actualizar el odontologo porque no se encuentra en nuestra base de datos");
-            throw new ResourceNotFoundException("No existe registro de odontologo con id " + id);
+            throw new ResourceNotFoundException("No existe registro del odontologo con id " + id);
         }
 
         return odontologoSalidaDto ;

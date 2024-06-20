@@ -11,25 +11,24 @@ public class TurnoEntradaDto {
 
     @FutureOrPresent(message = "La fecha y hora del turno no pueden ser anterior a la actual")
     @NotNull(message = "El campo fecha y hora de turno no puede ser nulo")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime fechaYHora;
 
     @NotNull(message = "El campo id de odontologo del turno no puede ser nulo")
     @Valid
-    private OdontologoEntradaDto odontologo;
+    private Long odontologo;
 
     @NotNull(message = "El campo id de paciente del turno no puede ser nulo")
     @Valid
-    private PacienteEntradaDto paciente;
+    private Long paciente;
 
-    private Long id;
     public TurnoEntradaDto() {
     }
 
-    public TurnoEntradaDto(LocalDateTime fechaYHora, OdontologoEntradaDto odontologoEntradaDto, PacienteEntradaDto pacienteEntradaDto) {
+    public TurnoEntradaDto(LocalDateTime fechaYHora, Long odontologo, Long paciente) {
         this.fechaYHora = fechaYHora;
-        this.odontologo = odontologoEntradaDto;
-        this.paciente = pacienteEntradaDto;
+        this.odontologo = odontologo;
+        this.paciente = paciente;
     }
 
     public LocalDateTime getFechaYHora() {
@@ -40,28 +39,19 @@ public class TurnoEntradaDto {
         this.fechaYHora = fechaYHora;
     }
 
-    public OdontologoEntradaDto getOdontologo() {
+    public Long getOdontologo() {
         return odontologo;
     }
 
-    public void setOdontologo(OdontologoEntradaDto odontologoEntradaDto) {
-        this.odontologo = odontologoEntradaDto;
+    public void setOdontologo(Long odontologo) {
+        this.odontologo = odontologo;
     }
 
-    public PacienteEntradaDto getPaciente() {
+    public Long getPaciente() {
         return paciente;
     }
 
-    public void setPaciente(PacienteEntradaDto pacienteEntradaDto) {
-        this.paciente = pacienteEntradaDto;
+    public void setPaciente(Long paciente) {
+        this.paciente = paciente;
     }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
 }

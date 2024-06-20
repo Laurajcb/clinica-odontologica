@@ -14,16 +14,15 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import org.springframework.test.context.TestPropertySource;
 import java.time.LocalDateTime;
+import java.util.HashMap;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-
 
 @SpringBootTest
 @TestPropertySource(locations = "classpath:application-test.properties")
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-
 public class TurnoServiceTest {
-
     @Autowired
     private TurnoService turnoService;
 
@@ -34,13 +33,14 @@ public class TurnoServiceTest {
     private PacienteService pacienteService;
 
     private Long odontologoId;
+
     private Long pacienteId;
 
     @BeforeEach
     void setUpEach() {
         //Crea, guarda un odontologo si no existe
         if (odontologoId == null) {
-            OdontologoEntradaDto odontologoEntradaDto = new OdontologoEntradaDto("d1233", "Juan", "Perez");
+            OdontologoEntradaDto odontologoEntradaDto = new OdontologoEntradaDto("RM-456789", "Juan", "Perez");
 
             OdontologoSalidaDto odontologoGuardado = odontologoService.registrarOdontologo(odontologoEntradaDto);
             assertNotNull(odontologoGuardado.getId());
@@ -60,45 +60,53 @@ public class TurnoServiceTest {
 
     @Test
     @Order(1)
-    void deberiaGuardarUnTurnoCorrectamente() {
-        OdontologoEntradaDto odontologoEntradaDto = new OdontologoEntradaDto("d1233", "Juan", "Perez");
-        DomicilioEntradaDto domicilioEntradaDto = new DomicilioEntradaDto("Calle", 345, "Puente", "Aranda");
-        PacienteEntradaDto pacienteEntradaDto = new PacienteEntradaDto("Maria", "Perez", 12345, domicilioEntradaDto);
+    void deberiaGuardarUnTurnoYRetornarSuId() {
+        TurnoEntradaDto turnoEntradaDto = new TurnoEntradaDto(LocalDateTime.now(), odontologoId, pacienteId);
 
-        TurnoEntradaDto turnoEntradaDto = new TurnoEntradaDto(LocalDateTime.now(), odontologoEntradaDto, pacienteEntradaDto);
-        assertDoesNotThrow(() -> {
-            TurnoSalidaDto turnoGuardado = turnoService.registrarTurno(turnoEntradaDto);
-            assertNotNull(turnoGuardado.getId());
-        });
+        TurnoSalidaDto turnoSalidaDto = turnoService.registrarTurno(turnoEntradaDto);
+
+        assertNotNull(turnoSalidaDto);
+        assertNotNull(turnoSalidaDto.getId());
+        assertEquals(odontologoId, turnoSalidaDto.getOdontologo().getId());
+        assertEquals(pacienteId, turnoSalidaDto.getPaciente().getId());
     }
 
     @Test
     @Order(2)
-    void deberiaBuscarUnTurnoCorrectamente() {
-        assertDoesNotThrow(() -> turnoService.buscarTurnoPorId(1L));
+    void deberiaDevolverUnaListaNoVaciaDeTurnos() {
+        HashMap<Long, TurnoSalidaDto> listadoDeTurnos = turnoService.listarTurnos();
+
+        assertFalse(listadoDeTurnos.isEmpty());
     }
 
     @Test
     @Order(3)
-    void deberiaFallarAlBuscarUnTurnoInexistente() {
-        assertThrows(ResourceNotFoundException.class, () -> turnoService.buscarTurnoPorId(987655L));
-    }
-
-    @Test
-    @Order(4)
-    void deberiaListarTurnosExistentes() {
-        assertFalse(turnoService.listarTurnos().isEmpty());
-    }
-
-    @Test
-    @Order(5)
-    void deberiaEliminarUnTurno() {
+    void deberiaEliminarseElTurnoConId1() {
         assertDoesNotThrow(() -> turnoService.eliminarTurno(1L));
     }
 
     @Test
+    @Order(4)
+    void deberiaDevolverUnaListaVaciaDeTurnos() {
+        HashMap<Long, TurnoSalidaDto> listadoDeTurnos = turnoService.listarTurnos();
+
+        assertTrue(listadoDeTurnos.isEmpty());
+    }
+
+    @Test
+    @Order(5)
+    void deberiaLanzarResourceNotFoundExceptionAlEliminarTurnoInexistente() {
+        Long idNoExistente = 999L;
+
+        assertThrows(ResourceNotFoundException.class, () -> turnoService.eliminarTurno(idNoExistente));
+    }
+
+    @Test
     @Order(6)
-    void deberiaFallarAlEliminarUnTurnoInexistente() {
-        assertThrows(ResourceNotFoundException.class, () -> turnoService.eliminarTurno(9455427L));
+    void deberiaLanzarResourceNotFoundExceptionAlModificarTurnoInexistente() {
+        TurnoEntradaDto turnoEntradaDto = new TurnoEntradaDto(LocalDateTime.now(), odontologoId, pacienteId);
+        Long idTurno = 1L;
+
+        assertThrows(ResourceNotFoundException.class, () -> turnoService.modificarTurno(turnoEntradaDto, idTurno));
     }
 }

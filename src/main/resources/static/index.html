@@ -8,107 +8,276 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <title>Frontend Pacientes - Clinica Odontologica</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap');
+    </style>
+    <link rel="stylesheet" href="./css/styles.css">
 </head>
 
 <body>
-<header>
-    <h1>Resgistro de Pacientes</h1>
-</header>
+    <header>
+        <h1>Clinica Odontólogica</h1>
+    </header>
 
-<main>
-    <form id="PacientesForm">
-        <label for="nombre">Nombre:</label>
-        <input type="text" id="nombre" name="nombre" required>
-
-        <label for="apellido">Apellido:</label>
-        <input type="text" id="apellido" name="apellido" required>
-
-        <label for="dni">Dni</label>
-        <input type="number" id="dni" name="dni" required>
-
-<!--        <label for="fechaIngreso">Fecha</label>-->
-<!--        <input type="date" id="fechaIngreso" name="fechaIngreso" value="fechaIngreso" required>-->
-
-        <label for="calle">Calle:</label>
-        <input type="text" id="calle" name="calle" required>
-
-        <label for="numero">Numero:</label>
-        <input type="number" id="numero" name="numero" required>
-
-        <label for="localidad">Localidad:</label>
-        <input type="text" id="localidad" name="localidad" required>
-
-        <label for="provincia">Provincia:</label>
-        <input type="text" id="provincia" name="provincia" required>
-
-        <button type="submit">Registrar Paciente</button>
-
-    </form>
-    <hr>
-
-    <article>
-        <h2>Buscar paciente</h2>
-
-        <form>
-            <label for="pacientes"></label>
-            <select name="pacientes" id="pacientes">
-                <option></option>
-            </select>
-
+    <main>
+        <article class="menu">
             <div>
-                <button type="submit">Buscar</button>
-                <button type="submit">Eliminar</button>
-                <button type="submit">Modificar</button>
+                <h3>Pacientes</h3>
+                <ul>
+                    <li id="mostrarModuloRegistrarPaciente">Registrar nuevo paciente</li>
+                    <li id="mostrarModuloBuscarPaciente">Buscar paciente</li>
+                </ul>
+
+                <h3>Odontologos</h3>
+                <ul>
+                    <li id="mostrarModuloRegistrarOdontologo">Registrar nuevo odontólogo</li>
+                    <li id="mostrarModuloBuscarOdontologo">Buscar odontólogo</li>
+                </ul>
+
+                <h3>Turnos</h3>
+                <ul>
+                    <li id="mostrarModuloRegistrarTurno">Registrar nuevo turno</li>
+                    <li id="mostrarModuloBuscarTurno">Buscar turno</li>
+                </ul>
             </div>
+        </article>
 
-        </form>
-        <hr>
-
-        <section>
-            <h2>Información del paciente: </h2>
-            <p>Nombre apellido</p>
-            <p>Dni</p>
-            <p>Fecha ingreso</p>
-            <p>Domicilio</p>
-        </section>
-
-
-        <section>
-            <form id="">
+        <article id="moduloRegistrarPaciente" style="display: none">
+            <h2>Registrar Paciente</h2>
+            <form id="registrarPacienteForm">
                 <label for="nombre">Nombre:</label>
-                <input type="text" id="nombre" name="nombre" value="nombre" required>
+                <input type="text" id="nombre" name="nombre" required>
 
                 <label for="apellido">Apellido:</label>
-                <input type="text" id="apellido" name="apellido" value="apellido" required>
+                <input type="text" id="apellido" name="apellido" required>
 
                 <label for="dni">Dni</label>
-                <input type="text" id="dni" name="dni" value="dni" required>
+                <input type="number" id="dni" name="dni" required>
 
                 <label for="calle">Calle:</label>
-                <input type="text" id="calle" name="calle" value="calle" required>
+                <input type="text" id="calle" name="calle" required>
 
                 <label for="numero">Numero:</label>
-                <input type="number" id="numero" name="numero" value="numero" required>
+                <input type="numero" id="numero" name="numero" required>
 
                 <label for="localidad">Localidad:</label>
-                <input type="text" id="localidad" name="localidad" value="localidad" required>
+                <input type="text" id="localidad" name="localidad" required>
 
                 <label for="provincia">Provincia:</label>
-                <input type="text" id="provincia" name="provincia" value="provincia" required>
+                <input type="text" id="provincia" name="provincia" required>
 
-                <button type="submit">Guardar cambios</button>
-                <button type="submit">Cancelar cambios</button>
+                <div class="buttons">
+                    <button type="submit" class="primaryBtn">Registrar Paciente</button>
+                </div>
             </form>
-        </section>
-    </article>
+        </article>
 
-    <script src="./js/registrarPaciente.js"></script>
+        <article id="moduloBuscarPaciente" style="display: none">
+            <h2>Buscar Paciente</h2>
+            <form id="buscarPacienteForm">
+                <label for="selectPacientes"></label>
+                <select id="selectPacientes" name="pacientes">
+                </select>
 
-</main>
+                <div class="buttons">
+                    <button type="submit" class="primaryBtn">Buscar</button>
+                </div>
+            </form>
+        </article>
 
-<footer>
-    <p></p>
-</footer>
+        <article id="moduloInformacionPaciente" style="display: none">
+            <h2>Información del Paciente </h2>
+            <section>
+                <p id="nombrePaciente">Nombre: </p>
+                <p id="dniPaciente">Dni: </p>
+                <p id="fechaIngresoPaciente">Fecha ingreso: </p>
+                <p id="domicilioPaciente">Domicilio: </p>
+            </section>
+            <div class="buttons">
+                <button id="eliminarPaciente" class="primaryBtn">Eliminar</button>
+                <button id="modificarPaciente" class="secondaryBtn">Modificar</button>
+            </div>
+        </article>
+
+        <article id="moduloModificarPaciente" style="display: none">
+            <h2>Modificar Paciente</h2>
+            <form id="modificarPacienteForm">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="modificarNombre" name="nombre" required>
+
+                <label for="apellido">Apellido:</label>
+                <input type="text" id="modificarApellido" name="apellido" required>
+
+                <label for="dni">Dni</label>
+                <input type="text" id="modificarDni" name="dni" required>
+
+                <label for="calle">Calle:</label>
+                <input type="text" id="modificarCalle" name="calle" required>
+
+                <label for="numero">Numero:</label>
+                <input type="number" id="modificarNumero" name="numero" required>
+
+                <label for="localidad">Localidad:</label>
+                <input type="text" id="modificarLocalidad" name="localidad" required>
+
+                <label for="provincia">Provincia:</label>
+                <input type="text" id="modificarProvincia" name="provincia" required>
+
+                <div class="buttons">
+                    <button type="submit" class="primaryBtn">Guardar</button>
+                    <button id="cancelarModificarPaciente" class="secondaryBtn">Cancelar</button>
+                </div>
+            </form>
+        </article>
+
+        <article id="moduloRegistrarOdontologo" style="display: none">
+            <h2>Registrar Odontólogo</h2>
+            <form id="registrarOdontologoForm">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombreFormOdontologo" name="nombre" required>
+
+                <label for="apellido">Apellido:</label>
+                <input type="text" id="apellidoFormOdontologo" name="apellido" required>
+
+                <label for="matricula">Matrícula</label>
+                <input type="text" id="matricula" name="matricula" required>
+
+                <div class="buttons">
+                    <button type="submit" class="primaryBtn">Registrar Odontólogo</button>
+                </div>
+            </form>
+        </article>
+
+        <article id="moduloBuscarOdontologo" style="display: none">
+            <h2>Buscar Odontólogo</h2>
+            <form id="buscarOdontologoForm">
+                <label for="selectOdontologos"></label>
+                <select id="selectOdontologos" name="odontologos">
+                </select>
+
+                <div class="buttons">
+                    <button type="submit" class="primaryBtn">Buscar</button>
+                </div>
+            </form>
+        </article>
+
+        <article id="moduloInformacionOdontologo" style="display: none">
+            <h2>Información del Odontólogo </h2>
+            <section>
+                <p id="nombreOdontologo">Nombre: </p>
+                <p id="matriculaOdontologo">Matrícula: </p>
+            </section>
+            <div class="buttons">
+                <button id="eliminarOdontologo" class="primaryBtn">Eliminar</button>
+                <button id="modificarOdontologo" class="secondaryBtn">Modificar</button>
+            </div>
+        </article>
+
+        <article id="moduloModificarOdontologo" style="display: none">
+            <h2>Modificar Odontologo</h2>
+            <form id="modificarOdontologoForm">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="modificarNombreOdontologo" name="nombre" required>
+
+                <label for="apellido">Apellido:</label>
+                <input type="text" id="modificarApellidoOdontologo" name="apellido" required>
+
+                <label for="matricula">Matrícula</label>
+                <input type="text" id="modificarMatricula" name="matricula" required>
+
+                <div class="buttons">
+                    <button type="submit" class="primaryBtn">Guardar</button>
+                    <button id="cancelarModificarOdontologo" class="secondaryBtn">Cancelar</button>
+                </div>
+            </form>
+        </article>
+
+        <article id="moduloRegistrarTurno" style="display: none">
+            <h2>Registrar Turno</h2>
+            <form id="registrarTurnoForm">
+                <label for="fechaYHora">Seleccione una fecha y hora:</label>
+                <input type="datetime-local" id="fechaYHora" name="fechaYHora">
+
+                <label for="selectOdontologos"></label>
+                <select id="selectOdontologosTurno" name="odontologos">
+                </select>
+
+                <label for="selectPacientes"></label>
+                <select id="selectPacientesTurno" name="pacientes">
+                </select>
+
+                <div class="buttons">
+                    <button type="submit" class="primaryBtn">Registrar Turno</button>
+                </div>
+            </form>
+        </article>
+
+        <article id="moduloBuscarTurno" style="display: none">
+            <h2>Buscar Turno</h2>
+            <form id="buscarTurnoForm">
+                <label for="selectTurnos"></label>
+                <select id="selectTurnos" name="turnos">
+                </select>
+
+                <div class="buttons">
+                    <button type="submit" class="primaryBtn">Buscar</button>
+                </div>
+            </form>
+        </article>
+
+        <article id="moduloInformacionTurno" style="display: none">
+            <h2>Información del Turno </h2>
+            <section>
+                <p id="fechaYHoraTurno">Fecha y hora: </p>
+                <p id="odontologoTurno">Odontólogo: </p>
+                <p id="pacienteTurno">Paciente: </p>
+            </section>
+
+            <div class="buttons">
+                <button id="eliminarTurno" class="primaryBtn">Eliminar</button>
+                <button id="modificarTurno" class="secondaryBtn">Modificar</button>
+            </div>
+        </article>
+
+        <article id="moduloModificarTurno" style="display: none">
+            <h2>Modificar Turno</h2>
+            <form id="modificarTurnoForm">
+                <label for="fechaYHora">Seleccione una fecha y hora:</label>
+                <input type="datetime-local" id="modificarFechaYHora" name="fechaYHora">
+
+                <label for="selectOdontologos"></label>
+                <select id="modificarSelectOdontologos" name="odontologos">
+                </select>
+
+                <label for="selectPacientes"></label>
+                <select id="modificarSelectPacientes" name="pacientes">
+                </select>
+
+                <div class="buttons">
+                    <button type="submit" class="primaryBtn">Guardar</button>
+                    <button id="cancelarModificarTurno" class="secondaryBtn">Cancelar</button>
+                </div>
+            </form>
+        </article>
+
+        <script src="./js/cargarModulos.js"></script>
+        <script src="./js/registrarPaciente.js"></script>
+        <script src="./js/buscarPaciente.js"></script>
+        <script src="./js/eliminarPaciente.js"></script>
+        <script src="./js/modificarPaciente.js"></script>
+        <script src="./js/registrarOdontologo.js"></script>
+        <script src="./js/buscarOdontologo.js"></script>
+        <script src="./js/eliminarOdontologo.js"></script>
+        <script src="./js/modificarOdontologo.js"></script>
+        <script src="./js/registrarTurno.js"></script>
+        <script src="./js/buscarTurno.js"></script>
+        <script src="./js/eliminarTurno.js"></script>
+        <script src="./js/modificarTurno.js"></script>
+    </main>
+
+    <footer>
+        <div>Created by Laura Callejas y Angelica Rodriguez</div>
+    </footer>
 </body>
 
 </html>

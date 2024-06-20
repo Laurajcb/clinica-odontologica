@@ -14,7 +14,7 @@ import java.util.HashMap;
 
 @RestController
 @RequestMapping("pacientes")
-@CrossOrigin(origins = "*")
+@CrossOrigin
 public class PacienteController {
     private IPacienteService pacienteService;
 
@@ -44,8 +44,8 @@ public class PacienteController {
     }
 
     @DeleteMapping("/eliminar")
-    public ResponseEntity<?> eliminarPaciente(@RequestParam Long id)  throws ResourceNotFoundException {
+    public ResponseEntity<?> eliminarPaciente(@RequestParam Long id) throws ResourceNotFoundException {
         pacienteService.eliminarPaciente(id);
-        return new ResponseEntity<>("Paciente eliminado exitosamente", HttpStatus.NO_CONTENT);
+        return ResponseEntity.ok("Paciente eliminado exitosamente");
     }
 }

@@ -16,7 +16,6 @@ public class OdontologoEntradaDto {
     @Size(max = 50, message = "El apellido debe tener maximo 50 caracteres")
     private String apellido;
 
-    private Long id;
     public OdontologoEntradaDto() {
     }
 
@@ -49,12 +48,4 @@ public class OdontologoEntradaDto {
     public void setApellido(String apellido) {
         this.apellido = apellido;
     }
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
 }

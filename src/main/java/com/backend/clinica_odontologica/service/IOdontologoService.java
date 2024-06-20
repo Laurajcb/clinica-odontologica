@@ -11,5 +11,5 @@ public interface IOdontologoService {
     HashMap<Long, OdontologoSalidaDto> listarOdontologos();
     OdontologoSalidaDto buscarOdontologoPorId(Long id);
     void eliminarOdontologo(Long id) throws ResourceNotFoundException;
-    OdontologoSalidaDto modificarOdontologo(OdontologoEntradaDto odontologoEntradaDto, Long id);
+    OdontologoSalidaDto modificarOdontologo(OdontologoEntradaDto odontologoEntradaDto, Long id) throws ResourceNotFoundException;
 }

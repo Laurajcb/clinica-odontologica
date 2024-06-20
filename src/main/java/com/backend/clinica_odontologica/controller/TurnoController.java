@@ -14,6 +14,7 @@ import java.util.HashMap;
 
 @RestController
 @RequestMapping("turnos")
+@CrossOrigin
 public class TurnoController {
     private ITurnoService turnoService;
 
@@ -28,14 +29,9 @@ public class TurnoController {
         return ResponseEntity.ok(turnoSalidaDto);
     }
 
-    @ExceptionHandler(ResourceNotFoundException.class)
-    public ResponseEntity<String> handleResourceNotFoundException(ResourceNotFoundException ex) {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
-    }
-
     @GetMapping("/listar/todos")
-    public HashMap<Long, TurnoSalidaDto> listarTurnos() {
-        return turnoService.listarTurnos();
+    public ResponseEntity<HashMap<Long, TurnoSalidaDto>> listarTurnos() {
+        return new ResponseEntity<>(turnoService.listarTurnos(), HttpStatus.OK);
     }
 
     @GetMapping("/listar/{id}")
@@ -51,7 +47,6 @@ public class TurnoController {
     @DeleteMapping("/eliminar")
     public ResponseEntity<?> eliminarTurno(@RequestParam Long id) throws ResourceNotFoundException {
         turnoService.eliminarTurno(id);
-        return new ResponseEntity<>("Turno eliminado exitosamente", HttpStatus.NO_CONTENT);
+        return ResponseEntity.ok("Turno eliminado exitosamente");
     }
-
 }
